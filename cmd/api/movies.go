@@ -3,6 +3,9 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
+
+	"github.com/kaungmyathan22/golang-projec-greenlight/internal/data"
 )
 
 // Add a createMovieHandler for the "POST /v1/movies" endpoint. For now, we simply
@@ -11,7 +14,6 @@ func (app *application) createMovieHandler(w http.ResponseWriter, _ *http.Reques
 	_, err := fmt.Fprintln(w, "create a new movie")
 	if err != nil {
 		panic(err)
-		return
 	}
 }
 
@@ -22,8 +24,17 @@ func (app *application) showMovieHandler(w http.ResponseWriter, r *http.Request)
 		http.NotFound(w, r)
 		return
 	}
-	_, err = fmt.Fprintf(w, "show the details of movie %d\n", id)
+	movie := data.Movie{
+		ID:        id,
+		CreatedAt: time.Now(),
+		Title:     "Casablanca",
+		Runtime:   102,
+		Genres:    []string{"drama", "romance", "war"},
+		Version:   1,
+	}
+	err = app.writeJSON(w, http.StatusOK, movie, nil)
 	if err != nil {
-		return
+		app.logger.Error(err.Error())
+		http.Error(w, "The server encountered a problem and could not process your request", http.StatusInternalServerError)
 	}
 }
