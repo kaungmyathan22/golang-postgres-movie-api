@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/kaungmyathan22/golang-projec-greenlight/internal/data"
+	"github.com/kaungmyathan22/golang-projec-greenlight/internal/validator"
 )
 
 // Add a createMovieHandler for the "POST /v1/movies" endpoint. For now, we simply
@@ -22,6 +23,18 @@ func (app *application) createMovieHandler(w http.ResponseWriter, r *http.Reques
 		app.badRequestResponse(w, r, err)
 		return
 	}
+	movie := &data.Movie{
+		Title:   input.Title,
+		Year:    input.Year,
+		Runtime: input.Runtime,
+		Genres:  input.Genres,
+	}
+	v := validator.New()
+	if data.ValidateMovie(v, movie); !v.Valid() {
+		app.failedValidationResponse(w, r, v.Errors)
+		return
+	}
+
 	fmt.Fprintf(w, "%+v\n", input)
 }
 
