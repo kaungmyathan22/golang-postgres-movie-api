@@ -10,6 +10,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/kaungmyathan22/golang-projec-greenlight/internal/data"
 	_ "github.com/lib/pq"
 )
 
@@ -35,6 +36,7 @@ type config struct {
 type application struct {
 	config config
 	logger *slog.Logger
+	models data.Models
 }
 
 func main() {
@@ -70,6 +72,7 @@ func main() {
 	app := &application{
 		config: cfg,
 		logger: logger,
+		models: data.NewModels(db),
 	}
 	// Declare a new server mux and add a /v1/healthcheck route which dispatches requests // to the healthcheckHandler method (which we will create in a moment).
 	// Declare an HTTP server which listens on the port provided in the config struct, // uses the server we created above as the handler, has some sensible timeout // settings and writes any log messages to the structured logger at Error level.
