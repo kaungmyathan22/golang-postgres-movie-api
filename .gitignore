@@ -1,3 +1,4 @@
+*.http
 # Created by https://www.toptal.com/developers/gitignore/api/go,jetbrains
 # Edit at https://www.toptal.com/developers/gitignore?templates=go,jetbrains
 
