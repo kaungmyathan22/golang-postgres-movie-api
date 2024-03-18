@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/kaungmyathan22/golang-projec-greenlight/internal/data"
+	"github.com/kaungmyathan22/golang-projec-greenlight/internal/mailer"
 	_ "github.com/lib/pq"
 )
 
@@ -47,6 +48,7 @@ type application struct {
 	config config
 	logger *slog.Logger
 	models data.Models
+	mailer mailer.Mailer
 }
 
 func main() {
@@ -96,6 +98,7 @@ func main() {
 		config: cfg,
 		logger: logger,
 		models: data.NewModels(db),
+		mailer: mailer.New(cfg.smtp.host, cfg.smtp.port, cfg.smtp.username, cfg.smtp.password, cfg.smtp.sender),
 	}
 	err = app.serve()
 	if err != nil {
