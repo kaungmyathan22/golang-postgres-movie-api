@@ -68,7 +68,7 @@ func (app *application) serve() error {
 		// Call Wait() to block until our WaitGroup counter is zero. This essentially blocks
 		// until the background goroutines have finished. Then we return nil on the shutdownError
 		// channel to indicate that the shutdown as compleeted without any issues.
-		// app.wg.Wait()
+		app.wg.Wait()
 		shutdownError <- nil
 
 	}()
