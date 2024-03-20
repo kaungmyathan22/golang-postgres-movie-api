@@ -99,7 +99,7 @@ func (app *application) registerUserHandler(w http.ResponseWriter, r *http.Reque
 			// Importantly, if there is an error sending the email then we log the error
 			// instead of raising a server error like before when we handled
 			// the email send functionality without a goroutine
-			app.logger.PrintError(err, nil)
+			app.logger.Error(err.Error(), nil)
 		}
 	})
 
