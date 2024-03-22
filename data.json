@@ -1,0 +1,28 @@
+[
+    {
+        "title": "Moana",
+        "year": 2016,
+        "runtime": 107,
+        "genres": [
+            "animation",
+            "adventure"
+        ]
+    },
+    {
+        "title": "Deadpool",
+        "year": 2016,
+        "runtime": "108 mins",
+        "genres": [
+            "action",
+            "comedy"
+        ]
+    },
+    {
+        "title": "The Breakfast Club",
+        "year": 1986,
+        "runtime": "96 mins",
+        "genres": [
+            "drama"
+        ]
+    }
+]
